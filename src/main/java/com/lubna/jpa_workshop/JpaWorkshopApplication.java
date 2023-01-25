@@ -29,7 +29,6 @@ public class JpaWorkshopApplication implements CommandLineRunner {
         User lubna = new User("Lubna", "12345", LocalDate.now());
         Details details = new Details("lubna@gmail.com", "lubna", LocalDate.now());
         lubna.setDetails(details);
-        details.setUser(lubna);
         appUserDao.create(lubna);
 
         System.out.println(appUserDao.findAll());

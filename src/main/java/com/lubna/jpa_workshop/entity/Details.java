@@ -18,9 +18,6 @@ public class Details {
 
     private LocalDate birthDate;
 
-    @OneToOne(mappedBy = "details")
-    private User user;
-
     public Details() {
     }
 
@@ -63,17 +60,8 @@ public class Details {
     }
 
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     @Override
     public String toString() {
-        return "Details{" +
-                "detailsId=" + id +
-                ", email='" + email + '\'' +
-                ", name='" + name + '\'' +
-                ", birthDate=" + birthDate +
-                '}';
+        return "Details{" + "detailsId=" + id + ", email='" + email + '\'' + ", name='" + name + '\'' + ", birthDate=" + birthDate + '}';
     }
 }

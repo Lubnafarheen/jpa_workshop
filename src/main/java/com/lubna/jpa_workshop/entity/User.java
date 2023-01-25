@@ -40,13 +40,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "AppUser{" +
-                "appUserId=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", registrationDate=" + registrationDate +
-                ", details=" + details +
-                '}';
+        return "AppUser{" + "appUserId=" + id + ", username='" + username + '\'' + ", password='" + password + '\'' + ", registrationDate=" + registrationDate + ", details=" + details + '}';
     }
 
     public int getId() {
