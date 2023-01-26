@@ -1,6 +1,6 @@
 package com.lubna.jpa_workshop.dao.impl;
 
-import com.lubna.jpa_workshop.dao.AppUserDao;
+import com.lubna.jpa_workshop.dao.UserDao;
 import com.lubna.jpa_workshop.entity.User;
 import com.lubna.jpa_workshop.exception.DataNotFoundException;
 import org.springframework.stereotype.Repository;
@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContext;
 import java.util.Collection;
 
 @Repository
-public class AppUserDaoImpl implements AppUserDao {
+public class UserDaoImpl implements UserDao {
 
     @PersistenceContext
     EntityManager entityManager;
@@ -30,7 +30,6 @@ public class AppUserDaoImpl implements AppUserDao {
         User user = entityManager.find(User.class, id);
         if (user != null) entityManager.remove(user);
         else throw new DataNotFoundException("AppUser cannot be found");
-
     }
 
     @Override

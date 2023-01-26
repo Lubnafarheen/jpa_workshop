@@ -20,8 +20,8 @@ public class User {
 
     private LocalDate registrationDate;
 
-    @OneToOne(cascade = {ALL})
-    @JoinColumn(name = "details_id", referencedColumnName = "id")
+    @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE} )
+    @JoinColumn(name = "details_id")
     private Details details;
 
     public User() {
