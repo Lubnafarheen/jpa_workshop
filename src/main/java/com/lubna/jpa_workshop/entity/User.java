@@ -2,6 +2,8 @@ package com.lubna.jpa_workshop.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static javax.persistence.CascadeType.ALL;
 
@@ -24,6 +26,9 @@ public class User {
     @JoinColumn(name = "details_id")
     private Details details;
 
+    @OneToMany(mappedBy = "borrower",  orphanRemoval = true)
+    private List<BookLoan> loans;
+
     public User() {
     }
 
@@ -41,6 +46,14 @@ public class User {
     @Override
     public String toString() {
         return "AppUser{" + "appUserId=" + id + ", username='" + username + '\'' + ", password='" + password + '\'' + ", registrationDate=" + registrationDate + ", details=" + details + '}';
+    }
+
+    public List<BookLoan> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(List<BookLoan> loans) {
+        this.loans = loans;
     }
 
     public int getId() {
@@ -81,5 +94,20 @@ public class User {
 
     public void setDetails(Details details) {
         this.details = details;
+    }
+
+    public void addBookLoan(BookLoan bookLoan){
+        if (bookLoan == null) throw new IllegalArgumentException("BookLoan was null");
+        if (loans == null) loans = new ArrayList<>();
+        loans.add(bookLoan);
+        bookLoan.setBorrower(this);
+    }
+
+    public void removeBookLoan(BookLoan bookLoan){
+        if (bookLoan == null) throw new IllegalArgumentException("BookLoan was null");
+        if (loans !=null){
+            bookLoan.setBorrower(null);
+            loans.remove(bookLoan);
+        }
     }
 }

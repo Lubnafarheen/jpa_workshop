@@ -1,18 +1,18 @@
 package com.lubna.jpa_workshop;
 
+import com.lubna.jpa_workshop.dao.AuthorDao;
 import com.lubna.jpa_workshop.dao.BookDao;
 import com.lubna.jpa_workshop.dao.BookLoanDao;
 import com.lubna.jpa_workshop.dao.UserDao;
-import com.lubna.jpa_workshop.entity.Book;
-import com.lubna.jpa_workshop.entity.BookLoan;
-import com.lubna.jpa_workshop.entity.Details;
-import com.lubna.jpa_workshop.entity.User;
+import com.lubna.jpa_workshop.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @SpringBootApplication
 public class JpaWorkshopApplication implements CommandLineRunner {
@@ -25,6 +25,10 @@ public class JpaWorkshopApplication implements CommandLineRunner {
 
     @Autowired
     BookLoanDao bookLoanDao;
+
+    @Autowired
+    AuthorDao authorDao;
+
 
     public static void main(String[] args) {
         SpringApplication.run(JpaWorkshopApplication.class, args);
@@ -45,13 +49,13 @@ public class JpaWorkshopApplication implements CommandLineRunner {
         appUserDao.create(peter);
 
         //updating username peter to petty
-        peter.setUsername("Petty");
-        appUserDao.update(peter);
-        System.out.println(appUserDao.findAll());
+        //peter.setUsername("Petty");
+        //appUserDao.update(peter);
+        // System.out.println(appUserDao.findAll());
 
         //creating book objects
-        Book atomicHabits = new Book("23456", "Atomic Habits", 10);
-        Book headFirst = new Book("6789", "Head First", 10);
+         Book atomicHabits = new Book("23456", "Atomic Habits", 10);
+         Book headFirst = new Book("6789", "Head First", 10);
 
         //persisting books in db
         Book createdBook1 = bookDao.create(atomicHabits);
@@ -69,5 +73,16 @@ public class JpaWorkshopApplication implements CommandLineRunner {
         loanHf.setBorrower(userLubna);
         loanHf.setBook(createdBook2);
         bookLoanDao.update(loanHf);
+
+        Set<Book> bookList = new HashSet<>();
+        bookList.add(atomicHabits);
+        bookList.add(headFirst);
+
+        userLubna.addBookLoan(loanAtomic);
+
+      Author jamesClear = authorDao.create(new Author("James", "Clear"));
+      Author Kathy = authorDao.create(new Author("Kathy", "Sierra"));
+
+        
     }
 }

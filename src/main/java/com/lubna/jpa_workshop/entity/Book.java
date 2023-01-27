@@ -20,7 +20,7 @@ public class Book {
     private int maxLoanDays;
 
 
-    @ManyToMany(mappedBy ="writtenBooks" )
+    @ManyToMany(mappedBy = "writtenBooks")
     private Set<Author> authorList;
 
     public Book() {
@@ -32,18 +32,15 @@ public class Book {
         this.maxLoanDays = maxLoanDays;
     }
 
-    public void addAuthor(Author author){
-        if(author == null) throw  new IllegalArgumentException("Author data was null");
-        if (authorList == null) authorList= new HashSet<>();
+    public void addAuthor(Author author) {
+        if (author == null) throw new IllegalArgumentException("Author data was null");
+        if (authorList == null) authorList = new HashSet<>();
         authorList.add(author);
         author.addBook(this);
     }
-
-    public void removeAuthor(Author author){
-        if(author == null) throw  new IllegalArgumentException("Author data was null");
+    public void removeAuthor(Author author) {
+        if (author == null) throw new IllegalArgumentException("Author data was null");
     }
-
-
     public Set<Author> getAuthorList() {
         return authorList;
     }
